@@ -1,3 +1,9 @@
+<?php
+require './db.php';
+
+// Connexion à la DB
+$bdd = connexionBD('login', 'm151admin', 'm151admin');
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -24,7 +30,7 @@ and open the template in the editor.
                     <p><label>Email:</label><input type="text" placeholder="Email" name="email"/></p>
                     <p><label>Description:</label><textarea rows="5" cols="25" placeholder="description" name="description"></textarea></p>
                     <p><input type="submit" name="envoyer" value="Envoyer"/>
-                    <input type="button" name="annuler" value="Annuler"/></p>
+                        <input type="button" name="annuler" value="Annuler"/></p>
                 </div>
             </form>
         </section>
