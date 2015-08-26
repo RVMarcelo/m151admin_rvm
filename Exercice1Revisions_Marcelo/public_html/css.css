@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26 août 2015, 13:51:56
+    Author     : Administrateur
+*/
+body{
+    width: 40%;
+    margin: 0 auto;
+}
+
+header{
+    font-family: sans-serif;
+    background-color: gray;
+    color: white;
+    width: 350px;
+    text-align: center;
+}
+section{
+    font-family: sans-serif;
+    height: 370px;
+    width: 360px;
+    text-align: left;
+    background-color: deepskyblue;
+    padding-top: 10px;
+}
+section input{
+    text-align: left;
+}
+section label{
+    font-weight: bold;
+    display: block;
+    float: left;
+    width: 150px;
+}
