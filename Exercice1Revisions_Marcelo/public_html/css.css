@@ -36,3 +36,7 @@ section label{
     float: left;
     width: 150px;
 }
+footer{
+    font-family: monospace;
+    font-weight: bolder;
+}
