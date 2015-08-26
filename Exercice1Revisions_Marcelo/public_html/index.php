@@ -2,14 +2,9 @@
 require './db.php';
 
 // Connexion à la DB
-$bdd = connexionBD('login', 'm151admin', 'm151admin');
+$bdd = connexionBD('login', $user, $password);
 ?>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>Revisions Formulaire</title>

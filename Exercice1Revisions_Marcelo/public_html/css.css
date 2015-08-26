@@ -30,6 +30,9 @@ section{
 section input{
     text-align: left;
 }
+section input{
+    border: 1px groove black;
+}
 section label{
     font-weight: bold;
     display: block;
@@ -38,9 +41,7 @@ section label{
 }
 textarea{
     resize: none;
-}
-p{
- 
+    border: 1px groove black;
 }
 footer{
     font-family: monospace;
