@@ -36,6 +36,12 @@ section label{
     float: left;
     width: 150px;
 }
+textarea{
+    resize: none;
+}
+p{
+ 
+}
 footer{
     font-family: monospace;
     font-weight: bolder;
