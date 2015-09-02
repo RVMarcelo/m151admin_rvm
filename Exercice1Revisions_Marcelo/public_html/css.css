@@ -25,7 +25,8 @@ section{
     width: 360px;
     text-align: left;
     background-color: deepskyblue;
-    padding-top: 10px;
+    padding-top: 10px;    
+    border: 1px black solid;
 }
 section input{
     text-align: left;
