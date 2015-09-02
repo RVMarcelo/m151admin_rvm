@@ -17,13 +17,13 @@ $bdd = connexionBD('login', $user, $password);
         <section>
             <form>
                 <div>
-                    <p><label>Nom:</label><input type="text" placeholder="Nom" name="nom"/></p>
-                    <p><label>Prénom:</label><input type="text" placeholder="Prenom" name="prenom"/></p>
-                    <p><label>Date de naissance:</label><input type="date" name="date"/></p>
-                    <p><label>Pseudo:</label><input type="text" placeholder="Pseudo" name="pseudo"/></p>
-                    <p><label>Password:</label><input type="text" placeholder="Mot de passe" name="mdp"/></p>
-                    <p><label>Email:</label><input type="text" placeholder="Email" name="email"/></p>
-                    <p><label>Description:</label><textarea rows="5" cols="25" placeholder="description" name="description"></textarea></p>
+                    <p><label for="nom">Nom:</label><input id="nom" type="text" placeholder="Nom" name="nom"/></p>
+                    <p><label for="prenom">Prénom:</label><input id="prenom" type="text" placeholder="Prenom" name="prenom"/></p>
+                    <p><label for="date">Date de naissance:</label><input id="date" type="date" name="date"/></p>
+                    <p><label for="pseudo">Pseudo:</label><input id="pseudo" type="text" placeholder="Pseudo" name="pseudo"/></p>
+                    <p><label for="mdp">Password:</label><input id="mdp" type="text" placeholder="Mot de passe" name="mdp"/></p>
+                    <p><label for="email">Email:</label><input id="email" type="email" placeholder="Email" name="email"/></p>
+                    <p><label for="description">Description:</label><textarea id="description" rows="5" cols="25" placeholder="description" name="description"></textarea></p>
                     <p><input type="submit" name="envoyer" value="Envoyer"/>
                         <input type="button" name="annuler" value="Annuler"/></p>
                 </div>
