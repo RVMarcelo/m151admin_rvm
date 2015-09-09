@@ -8,25 +8,19 @@ and open the template in the editor.
     Author     : Administrateur
 */
 body{
-    width: 40%;
-    margin: 0 auto;
+    margin: 10px;
 }
 
 header{
     font-family: sans-serif;
     background-color: gray;
     color: white;
-    width: 350px;
     text-align: center;
 }
 section{
     font-family: sans-serif;
-    height: 370px;
-    width: 360px;
     text-align: left;
-    background-color: deepskyblue;
     padding-top: 10px;    
-    border: 1px black solid;
 }
 section input{
     text-align: left;
@@ -47,4 +41,10 @@ textarea{
 footer{
     font-family: monospace;
     font-weight: bolder;
+}
+table{      
+    margin-bottom: 20px;
+}
+table th{
+    font-weight: bold;
 }

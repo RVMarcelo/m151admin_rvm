@@ -2,6 +2,8 @@
 
 require './config.php';
 
+$table = 'formulaire';
+
 // Se connect à la DB et renvoi la connexion à l'appelant
 function GetDatabase() {
     static $dbc = null;
@@ -18,11 +20,11 @@ function GetDatabase() {
 
 if (isset($_REQUEST['envoyer'])) {
     CreateUser();
-    header("Location: index.php");
+    header("Location: users.php");
 }
 
 function CreateUser() {
-    $table = 'formulaire';
+    global $table;
 
     $nom = filter_input(INPUT_POST, 'nom');
     $prenom = filter_input(INPUT_POST, 'prenom');
@@ -57,6 +59,21 @@ function CreateUser() {
       echo'test'; */
 }
 
-function ShowUser(){
-    
+function getAllFields() {
+    global $table;
+
+
+    //Connexion à la base de données et création de la requette
+    $dbc = GetDatabase();
+    $dbc->quote($table);
+    $req = "SELECT * FROM ". $table;
+
+    //Preparation de la requete  et des parametres
+    $requPrep = $dbc->prepare($req);
+
+    //Execution de la requette et recuperation des données
+    $requPrep->execute();
+    $data = $requPrep->fetchAll();
+    $requPrep->closeCursor();
+    return $data;
 }
