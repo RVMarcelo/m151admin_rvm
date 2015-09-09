@@ -18,6 +18,8 @@ require './UserFunctions.php';
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Email</th>
+                    <th>Détails</th>
+                    <th>Modifier</th>
                 </tr>
                 <?php ShowUser();?>
             </table>
