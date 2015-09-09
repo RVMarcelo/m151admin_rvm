@@ -16,7 +16,7 @@ function GetDatabase() {
     return $dbc;
 }
 
-if (isset($_POST['envoyer'])) {
+if (isset($_REQUEST['envoyer'])) {
     CreateUser();
     header("Location: index.php");
 }
@@ -55,4 +55,8 @@ function CreateUser() {
 
       $dbc->exec($sql);
       echo'test'; */
+}
+
+function ShowUser(){
+    
 }
