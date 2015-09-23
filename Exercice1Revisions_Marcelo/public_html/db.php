@@ -22,7 +22,10 @@ if (isset($_REQUEST['envoyer'])) {
     CreateUser();
     header("Location: users.php");
 }
-
+if (isset($_REQUEST['modif'])) {
+    modifyUser();
+    header("Location: index.php?=".$_GET['id']);
+}
 function CreateUser() {
     global $table;
 
@@ -34,7 +37,7 @@ function CreateUser() {
     $email = filter_input(INPUT_POST, 'email');
     $description = filter_input(INPUT_POST, 'description');
 
-    $dbc = GetDatabase(); //remove var and place fonction in $requPrep = ...->prepare
+    $dbc = GetDatabase();
     $dbc->quote($table);
     $req = "INSERT INTO $table (Nom, Prenom, Date, Pseudo, Password, Email, Description) VALUES (:nom, :prenom, :date, :pseudo, SHA1(:mdp), :email, :description)";
 
@@ -59,9 +62,37 @@ function CreateUser() {
       echo'test'; */
 }
 
-function getAllFields() {
+function modifyUser() {
     global $table;
 
+    $nom = filter_input(INPUT_POST, 'nom');
+    $prenom = filter_input(INPUT_POST, 'prenom');
+    $date = filter_input(INPUT_POST, 'date');
+    $pseudo = filter_input(INPUT_POST, 'pseudo');
+    $mdp = filter_input(INPUT_POST, 'mdp');
+    $email = filter_input(INPUT_POST, 'email');
+    $description = filter_input(INPUT_POST, 'description');
+
+    $dbc = GetDatabase();
+    $dbc->quote($table);
+    $req = "UPDATE $table SET (Nom:nom, Prenom:prenom, Date:date, Pseudo:pseudo, Email:email, Description:description)";
+
+    //Preparation de la requete  et des parametres
+    $requPrep = $dbc->prepare($req);
+    $requPrep->bindParam(':nom', $nom, PDO::PARAM_STR);
+    $requPrep->bindParam(':prenom', $prenom, PDO::PARAM_STR);
+    $requPrep->bindParam(':date', $date, PDO::PARAM_STR);
+    $requPrep->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
+    $requPrep->bindParam(':mdp', $mdp, PDO::PARAM_STR);
+    $requPrep->bindParam(':email', $email, PDO::PARAM_STR);
+    $requPrep->bindParam(':description', $description, PDO::PARAM_STR);
+
+    $requPrep->execute();
+    $requPrep->closeCursor();
+}
+
+function getAllFields() {
+    global $table;
 
     //Connexion à la base de données et création de la requette
     $dbc = GetDatabase();
@@ -81,11 +112,8 @@ function getAllFields() {
 function getOneUser($id) {
 
     global $table;
-
-
     //Connexion à la base de données et création de la requette
     $req = GetDatabase()->query("SELECT * FROM " . $table . " WHERE ID = " . $id . " LIMIT 1");
-    
-    
+
     return $req->fetch();
 }

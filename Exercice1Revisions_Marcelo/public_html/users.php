@@ -17,16 +17,13 @@ require './UserFunctions.php';
 
                 <?php
                 if (!isset($_GET['id'])) {
-                    ShowUser(TableShowUser());
-                    echo '<a href = "index.php">Back to form</a><br/>';
+                    ShowUser(TableShowUser());                    
                 } else {
                     ShowUserDetails(TableShowOneUser());
-                    echo '<a href = "index.php">Back to form</a><br/>';
-                    echo '<a href = "users.php">Back to users</a>';
                 }
                 ?>
             </table>
-
+            <a href = "index.php">Formulaire</a><br/>
         </section>
         <footer>
             &copy; Rae Vennedict Marcelo 2015
