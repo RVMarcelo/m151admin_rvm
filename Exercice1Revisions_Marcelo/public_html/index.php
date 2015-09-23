@@ -22,7 +22,7 @@ require './db.php';
                     <br><label for="email">Email:</label><input id="email" type="email" placeholder="Email" name="email" required/><br>
                     <br><label for="description">Description:</label><textarea id="description" rows="5" cols="25" placeholder="description" name="description"></textarea><br>
                     <input type="submit" name="envoyer" value="Envoyer"/>
-                    <input type="button" name="annuler" value="Annuler"/>                       
+                    <input type="button" name="annuler" value="Annuler"/>          
 
                 </div>
             </form>            

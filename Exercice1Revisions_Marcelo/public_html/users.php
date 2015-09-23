@@ -23,6 +23,7 @@ require './UserFunctions.php';
                 </tr>
                 <?php ShowUser();?>
             </table>
+            <a href="index.php">Back to form</a>
         </section>
         <footer>
             &copy; Rae Vennedict Marcelo 2015

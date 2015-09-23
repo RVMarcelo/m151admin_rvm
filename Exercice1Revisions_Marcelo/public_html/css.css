@@ -10,7 +10,12 @@ and open the template in the editor.
 body{
     margin: 10px;
 }
-
+body a{
+    text-decoration: none;
+}
+body a:visited{
+    text-decoration: none;
+}
 header{
     font-family: sans-serif;
     background-color: gray;

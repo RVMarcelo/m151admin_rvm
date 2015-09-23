@@ -11,7 +11,8 @@ function ShowUser() {
         echo '<td>' . $user['Nom'] . '</td>';
         echo '<td>' . $user['Prenom'] . '</td>';
         echo '<td>' . $user['Email'] . '</td>';
-        echo '<td><a href="userDetails.php">Details</a></td>';
+        echo '<td><a href="users.php?id='.$user['ID'].'">Details</a></td>';
+        echo '<td><a href="users.php?id='.$user['ID'].'">Modifier</a></td>';
         echo '</tr>';
     }
 }
