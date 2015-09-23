@@ -66,7 +66,7 @@ function getAllFields() {
     //Connexion à la base de données et création de la requette
     $dbc = GetDatabase();
     $dbc->quote($table);
-    $req = "SELECT * FROM ". $table;
+    $req = "SELECT * FROM " . $table;
 
     //Preparation de la requete  et des parametres
     $requPrep = $dbc->prepare($req);
@@ -76,4 +76,16 @@ function getAllFields() {
     $data = $requPrep->fetchAll();
     $requPrep->closeCursor();
     return $data;
+}
+
+function getOneUser($id) {
+
+    global $table;
+
+
+    //Connexion à la base de données et création de la requette
+    $req = GetDatabase()->query("SELECT * FROM " . $table . " WHERE ID = " . $id . " LIMIT 1");
+    
+    
+    return $req->fetch();
 }

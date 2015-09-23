@@ -23,7 +23,14 @@ require './UserFunctions.php';
                     <th>Email</th>
                     <th>Description</th>                    
                 </tr>
-                <?php ShowUserDetails(); ?>
+                <?php 
+                
+               /* if(!isset($_GET['ID'])){
+                    ShowUserDetails();
+                }                
+                
+                */
+                ?>
             </table>
         </section>
         <footer>

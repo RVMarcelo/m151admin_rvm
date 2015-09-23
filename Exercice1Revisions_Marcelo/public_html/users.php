@@ -14,16 +14,19 @@ require './UserFunctions.php';
         <header><h1>Users</h1></header>
         <section>            
             <table border="1">
-                <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Email</th>
-                    <th>Détails</th>
-                    <th>Modifier</th>
-                </tr>
-                <?php ShowUser();?>
+
+                <?php
+                if (!isset($_GET['id'])) {
+                    ShowUser(TableShowUser());
+                    echo '<a href = "index.php">Back to form</a><br/>';
+                } else {
+                    ShowUserDetails(TableShowOneUser());
+                    echo '<a href = "index.php">Back to form</a><br/>';
+                    echo '<a href = "users.php">Back to users</a>';
+                }
+                ?>
             </table>
-            <a href="index.php">Back to form</a>
+
         </section>
         <footer>
             &copy; Rae Vennedict Marcelo 2015
