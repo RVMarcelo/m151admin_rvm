@@ -19,6 +19,7 @@ function TableShowOneUser() {
     echo '<th>Pseudo</th>';
     echo '<th>Mot de passe</th>';
     echo '<th>Email</th>';
+    echo '<th>Description</th>';
     echo '<th>Détails</th>';
     echo '</tr>';
 }
@@ -48,6 +49,7 @@ function ShowUserDetails() {
     echo '<td>' . $user['Pseudo'] . '</td>';
     echo '<td>' . $user['Password'] . '</td>';
     echo '<td>' . $user['Email'] . '</td>';    
+    echo '<td>' . $user['Description']. '</td>';
     echo '<td><a href="users.php">Retour</a></td>';
     echo '</tr>';
     
