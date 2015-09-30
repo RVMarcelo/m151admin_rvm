@@ -29,6 +29,7 @@ section{
 }
 section input{
     text-align: left;
+    margin-right: 5px;
 }
 section input{
     border: 1px groove black;

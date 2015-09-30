@@ -10,6 +10,7 @@ function GetDatabase() {
     if ($dbc == null) {
         try {
             $dbc = new PDO('mysql:dbname=' . NAME . ';host=' . HOST . '', USER, PASSWORD);
+            $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
         } catch (PDOException $e) {
             echo "Connection to mysql is impossible :", $e->getMessage() . "<br/>";
             die();
@@ -22,10 +23,14 @@ if (isset($_REQUEST['envoyer'])) {
     CreateUser();
     header("Location: users.php");
 }
-if (isset($_REQUEST['modif'])) {
-    modifyUser();
-    header("Location: index.php?=".$_GET['id']);
+if (isset($_REQUEST['modifLink'])) {
+    header("Location: index.php?=" . $_GET['id']);
 }
+if (isset($_REQUEST['modifButton'])) {
+    modifyUser($id);
+    header("Location: users.php");
+}
+
 function CreateUser() {
     global $table;
 
@@ -62,7 +67,7 @@ function CreateUser() {
       echo'test'; */
 }
 
-function modifyUser() {
+function modifyUser($id) {
     global $table;
 
     $nom = filter_input(INPUT_POST, 'nom');
@@ -75,7 +80,7 @@ function modifyUser() {
 
     $dbc = GetDatabase();
     $dbc->quote($table);
-    $req = "UPDATE $table SET (Nom:nom, Prenom:prenom, Date:date, Pseudo:pseudo, Email:email, Description:description)";
+    $req = "UPDATE " . $table . " SET Nom=:nom, Prenom=:prenom, Date=:date, Pseudo=:pseudo, Password=SHA1(:mdp), Email=:email, Description=:description WHERE ID = " . $id . ";";
 
     //Preparation de la requete  et des parametres
     $requPrep = $dbc->prepare($req);
@@ -89,6 +94,7 @@ function modifyUser() {
 
     $requPrep->execute();
     $requPrep->closeCursor();
+    var_dump($requPrep);
 }
 
 function getAllFields() {

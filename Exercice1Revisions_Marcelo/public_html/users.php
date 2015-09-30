@@ -17,7 +17,7 @@ require './UserFunctions.php';
 
                 <?php
                 if (!isset($_GET['id'])) {
-                    ShowUser(TableShowUser());                    
+                    ShowUser(TableShowUser());
                 } else {
                     ShowUserDetails(TableShowOneUser());
                 }
