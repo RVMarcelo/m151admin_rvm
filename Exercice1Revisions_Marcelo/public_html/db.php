@@ -67,9 +67,10 @@ function CreateUser() {
       echo'test'; */
 }
 
-function modifyUser($id) {
+function modifyUser() {
     global $table;
-
+    
+    $id = filter_input(INPUT_POST, 'id');
     $nom = filter_input(INPUT_POST, 'nom');
     $prenom = filter_input(INPUT_POST, 'prenom');
     $date = filter_input(INPUT_POST, 'date');
@@ -95,6 +96,19 @@ function modifyUser($id) {
     $requPrep->execute();
     $requPrep->closeCursor();
     var_dump($requPrep);
+}
+
+function deleteUser($idDelete) {
+    $deleteUser = GetDatabase()->prepare('DELETE FROM formulaire WHERE ID='. $idDelete .';');
+    $deleteUser->execute();
+}
+
+function loginUser($pseudo, $password)
+{
+    if((isset($pseudo)) && (isset($password)))
+    {
+        
+    }
 }
 
 function getAllFields() {

@@ -11,11 +11,13 @@ function ShowFormNew() {
     echo '<input type = "submit" name = "envoyer" value = "Envoyer"/>';
     echo '<input type = "button" name = "annuler" value = "Annuler"/><br/>';
     echo '<a href = "users.php">Utilisateurs</a>';
+    echo '<a href = "connexion.php">Connexion</a>';
 }
 
 function ShowFormModif() {   
     $user = getOneUser($_GET['id']);
-        
+    
+    $id = $user['ID'];
     $nom = $user['Nom'];
     $prenom = $user['Prenom'];
     $date = $user['Date'];
@@ -24,7 +26,7 @@ function ShowFormModif() {
     $email = $user['Email'];
     $description = $user['Description'];
    
-
+    echo '<br><input type="hidden" id="id" name="id" value="' . $id . '"/>';
     echo '<br><label for = "nom">Nom:</label><input id = "nom" type = "text" placeholder = "Nom" name = "nom" value="' . $nom . '" required/><br>';
     echo '<br><label for = "prenom">Prénom:</label><input id = "prenom" type = "text" placeholder = "Prenom" name = "prenom" value="' . $prenom . '" required/><br>';
     echo '<br><label for = "date">Date de naissance:</label><input id = "date" type = "date" name = "date" value="' . $date . '" required/><br>';
@@ -35,6 +37,14 @@ function ShowFormModif() {
     echo '<input type = "submit" name = "modifButton" value = "Modify"/>';
     echo '<input type = "button" name = "annuler" value = "Annuler"/><br/>';
     echo '<a href = "users.php">Utilisateurs</a>';
+    echo '<a href = "connexion.php">Connexion</a>';
+}
+
+function ShowFormConnection() {
+    echo '<br><label for = "pseudo">Pseudo:</label><input id = "pseudo" type = "text" placeholder = "Pseudo" name = "pseudo" required/><br>';
+    echo '<br><label for = "mdp">Password:</label><input id = "mdp" type = "password" placeholder = "Mot de passe" name = "mdp" required/> <br><br>';
+    echo '<input type = "submit" name = "connecter" value = "Se connecter"/>';
+    echo '<input type = "button" name = "annuler" value = "Annuler"/><br><br>';
 }
 
 function TableShowUser() {
@@ -71,7 +81,7 @@ function ShowUser() {
         echo '<td>' . $user['Email'] . '</td>';
         echo '<td><a href="users.php?id=' . $user['ID'] . '">Details</a></td>';
         echo '<td><a href="index.php?id=' . $user['ID'] . '" name="modifLink">Modifier</a></td>';
-        echo '<td><input type="submit" value="Supprimer" name="supprimer"/></td>';
+        echo '<td><a href="users.php?idDelete='. $user['ID'] .'" name="deleteUser">Supprimer</a></td>';
         echo '</tr>';
     }
 }

@@ -16,11 +16,18 @@ require './UserFunctions.php';
             <table border="1">
 
                 <?php
-                if (!isset($_GET['id'])) {
-                    ShowUser(TableShowUser());
-                } else {
-                    ShowUserDetails(TableShowOneUser());
-                }
+                    if(isset($_GET['idDelete']))
+                    {
+                        $idDelete = $_GET['idDelete'];
+                        deleteUser($idDelete);
+                        header('location:users.php');
+                    }
+                
+                    if (!isset($_GET['id'])) {
+                        ShowUser(TableShowUser());
+                    } else {
+                        ShowUserDetails(TableShowOneUser());
+                    }
                 ?>
             </table>
             <a href = "index.php">Formulaire</a><br/>
