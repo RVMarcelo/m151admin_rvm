@@ -10,7 +10,7 @@ function GetDatabase() {
     if ($dbc == null) {
         try {
             $dbc = new PDO('mysql:dbname=' . NAME . ';host=' . HOST . '', USER, PASSWORD);
-            $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+            $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             echo "Connection to mysql is impossible :", $e->getMessage() . "<br/>";
             die();
@@ -58,18 +58,11 @@ function CreateUser() {
 
     $requPrep->execute();
     $requPrep->closeCursor();
-
-
-    /* $sql = "INSERT INTO formulaire (Nom, Prenom, Date, Pseudo, Password, Email, Description) 
-     * VALUES (" .$nom .",".$prenom.",".$date.",".$pseudo.",".$mdp.",".$email.",".$description.")";
-
-      $dbc->exec($sql);
-      echo'test'; */
 }
 
 function modifyUser() {
     global $table;
-    
+
     $id = filter_input(INPUT_POST, 'id');
     $nom = filter_input(INPUT_POST, 'nom');
     $prenom = filter_input(INPUT_POST, 'prenom');
@@ -95,20 +88,23 @@ function modifyUser() {
 
     $requPrep->execute();
     $requPrep->closeCursor();
-    var_dump($requPrep);
+    //var_dump($requPrep);
 }
 
 function deleteUser($idDelete) {
-    $deleteUser = GetDatabase()->prepare('DELETE FROM formulaire WHERE ID='. $idDelete .';');
+    $deleteUser = GetDatabase()->prepare('DELETE FROM formulaire WHERE ID=' . $idDelete . ';');
     $deleteUser->execute();
 }
 
-function loginUser($pseudo, $password)
-{
-    if((isset($pseudo)) && (isset($password)))
-    {
-        
-    }
+function login($username, $pass) {
+    global $table;
+    
+    $request = GetDatabase()->prepare("SELECT Pseudo, Password FROM " . $table . " WHERE Pseudo = :pseudo AND Password=SHA1(:mdp) LIMIT 1");
+    $request->bindParam(':pseudo', $username);
+    $request->bindParam(':mdp', $pass);
+    $request->execute();
+    
+    return $request->fetch();
 }
 
 function getAllFields() {

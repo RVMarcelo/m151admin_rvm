@@ -1,14 +1,23 @@
 <?php
-    require './db.php';
-    require './UserFunctions.php';
-    
-    if(isset($_REQUEST['connecter']))
-    {
-        $pseudo = $_REQUEST['pseudo'];
-        $password = $_REQUEST['mdp'];
-        
-        loginUser($pseudo, $password);
+require_once './db.php';
+require_once './UserFunctions.php';
+
+$erreur = "";
+if (isset($_REQUEST['connecter'])) {
+
+    $userlogin = login($_REQUEST['pseudo'], $_REQUEST['mdp']);
+
+    if ($userlogin !== false) {       
+        session_start();
+        $_SESSION['userlogin'] = $_REQUEST['pseudo'];
+
+        header("Location: users.php?=LoggedIn");
+        exit;
+    } else {
+        $erreur = "pseudo ou mot de passe est érroné";
+        echo $erreur;
     }
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,10 +32,10 @@
         <header><h1>Formulaire</h1></header>
         <section>
 
-            <form action="db.php" method="post">
+            <form method="post">
                 <div>
                     <?php
-                        ShowFormConnection();
+                    ShowFormConnection();
                     ?>                    
                 </div>
             </form>            
