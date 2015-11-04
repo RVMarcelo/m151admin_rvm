@@ -36,7 +36,17 @@ if (isset($_REQUEST['modifLink'])) {
     header("Location: index.php?=" . $_GET['id']);
 }
 if (isset($_REQUEST['modifButton'])) {
-    modifyUser($id);
+    
+    $id = filter_input(INPUT_POST, 'id');
+    $nom = filter_input(INPUT_POST, 'nom');
+    $prenom = filter_input(INPUT_POST, 'prenom');
+    $date = filter_input(INPUT_POST, 'date');
+    $pseudo = filter_input(INPUT_POST, 'pseudo');
+    $mdp = filter_input(INPUT_POST, 'mdp');
+    $email = filter_input(INPUT_POST, 'email');
+    $description = filter_input(INPUT_POST, 'description');
+    
+    modifyUser($id, $nom, $prenom, $date, $pseudo, $mdp, $email, $description);
     header("Location: users.php");
 }
 
@@ -61,17 +71,10 @@ function CreateUser($nom, $prenom, $date, $pseudo, $mdp, $email, $description) {
     $requPrep->closeCursor();
 }
 
-function modifyUser() {
+function modifyUser($id, $nom, $prenom, $date, $pseudo, $mdp, $email, $description) {
     global $table;
 
-    $id = filter_input(INPUT_POST, 'id');
-    $nom = filter_input(INPUT_POST, 'nom');
-    $prenom = filter_input(INPUT_POST, 'prenom');
-    $date = filter_input(INPUT_POST, 'date');
-    $pseudo = filter_input(INPUT_POST, 'pseudo');
-    $mdp = filter_input(INPUT_POST, 'mdp');
-    $email = filter_input(INPUT_POST, 'email');
-    $description = filter_input(INPUT_POST, 'description');
+    
 
     $dbc = GetDatabase();
     $dbc->quote($table);
