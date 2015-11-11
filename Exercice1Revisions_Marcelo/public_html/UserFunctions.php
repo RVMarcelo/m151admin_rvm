@@ -1,17 +1,5 @@
 <?php
 
-function ShowFormNew() {
-    echo '<br><label for = "nom">Nom:</label><input id = "nom" type = "text" placeholder = "Nom" name = "nom" required/><br>';
-    echo '<br><label for = "prenom">Prénom:</label><input id = "prenom" type = "text" placeholder = "Prenom" name = "prenom" required/><br>';
-    echo '<br><label for = "date">Date de naissance:</label><input id = "date" type = "date" name = "date" required/><br>';
-    echo '<br><label for = "pseudo">Pseudo:</label><input id = "pseudo" type = "text" placeholder = "Pseudo" name = "pseudo" required/><br>';
-    echo '<br><label for = "mdp">Password:</label><input id = "mdp" type = "password" placeholder = "Mot de passe" name = "mdp" required/><br>';
-    echo '<br><label for = "email">Email:</label><input id = "email" type = "email" placeholder = "Email" name = "email" required/><br>';
-    echo '<br><label for = "description">Description:</label><textarea id = "description" rows = "5" cols = "25" placeholder = "description" name = "description"></textarea><br>';
-    echo '<input type = "submit" name = "envoyer" value = "Envoyer"/>';
-    echo '<input type = "button" name = "annuler" value = "Annuler"/><br/>';
-    echo '<a href = "users.php">Utilisateurs</a><br />';    
-}
 //TODO je suis pas convaincue de cette manière d'appeler le getOneUser dans la fonction de showFormModif, cela créé une interdépendence entre les deux
 //il faudrait peut-être plutot faire cet appel endehors puis appeler ShowFormModif en passant en paramètre $user. Pareil pour les autres
 //endroits où vous avez ce genre d'interdépendence

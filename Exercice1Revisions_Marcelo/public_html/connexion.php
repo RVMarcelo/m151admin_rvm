@@ -7,7 +7,7 @@ if (isset($_REQUEST['connecter'])) {
 
     $userlogin = login($_REQUEST['pseudo'], $_REQUEST['mdp']);
 
-    if ($userlogin !== false) {       
+    if ($userlogin !== false) {
         session_start();
         $_SESSION['userlogin'] = $_REQUEST['pseudo'];
 
