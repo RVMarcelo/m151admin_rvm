@@ -19,7 +19,7 @@ function ShowFormModif($user) {
     echo '<br><label for = "prenom">Prénom:</label><input id = "prenom" type = "text" placeholder = "Prenom" name = "prenom" value="' . $prenom . '" required/><br>';
     echo '<br><label for = "date">Date de naissance:</label><input id = "date" type = "date" name = "date" value="' . $date . '" required/><br>';
     echo '<br><label for = "pseudo">Pseudo:</label><input id = "pseudo" type = "text" placeholder = "Pseudo" name = "pseudo" value="' . $pseudo . '" required/><br>';
-    echo '<br><label for = "mdp">Password:</label><input id = "mdp" type = "password" placeholder = "Modifie pas le mdp" name = "mdp"  value="" disabled/><br>';
+    echo '<br><label for = "mdp">Password:</label><input id = "mdp" type = "password" placeholder = "Entrez nouveau mot de passe" name = "mdp"  value=""/><br>';
     echo '<br><label for = "email">Email:</label><input id = "email" type = "email" placeholder = "Email" name = "email" value="' . $email . '" required/><br>';
     echo '<br><label for = "description">Description:</label><textarea id = "description" rows = "5" cols = "25" placeholder = "description" name = "description">' . $description . '</textarea><br>';
     echo '<input type = "submit" name = "modifButton" value = "Modify"/>';
