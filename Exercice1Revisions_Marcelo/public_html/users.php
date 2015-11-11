@@ -29,8 +29,10 @@ session_start();
                     echo '<th>Prénom</th>';
                     echo '<th>Email</th>';
                     echo '<th>Détails</th>';
-                    echo '<th>Modifier</th>';
-                    echo '<th>Supprimer</th>';
+                    if (isset($_SESSION['userlogin'])) {
+                        echo '<th>Modifier</th>';
+                        echo '<th>Supprimer</th>';
+                    }
                     echo '</tr>';
                     ShowUser();
                 } else {

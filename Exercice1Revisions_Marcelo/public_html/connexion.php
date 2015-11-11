@@ -18,6 +18,10 @@ if (isset($_REQUEST['connecter'])) {
         echo $erreur;
     }
 }
+
+
+$pseudo = isset($_REQUEST['pseudo']) ? $_REQUEST['pseudo'] : "";
+$mdp = isset($_REQUEST['mdp']) ? $_REQUEST['mdp'] : "";
 ?>
 
 <!DOCTYPE html>
@@ -34,9 +38,12 @@ if (isset($_REQUEST['connecter'])) {
 
             <form method="post">
                 <div>
-                    <?php
-                    ShowFormConnection();
-                    ?>                    
+                    <br><label for = "pseudo">Pseudo:</label><input id = "pseudo" type = "text" placeholder = "Pseudo" name = "pseudo" value="<?php echo $pseudo; ?>" required/><br>
+                    <br><label for = "mdp">Password:</label><input id = "mdp" type = "password" placeholder = "Mot de passe" name = "mdp" value="<?php echo $pseudo; ?>" required/> <br><br>
+                    <input type = "submit" name = "connecter" value = "Se connecter"/>
+                    <input type = "button" name = "annuler" value = "Annuler"/><br><br>
+                    <a href = "users.php">Utilisateurs</a><br />
+                    <a href = "index.php">Formulaire</a>              
                 </div>
             </form>            
         </section>

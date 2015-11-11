@@ -74,8 +74,6 @@ function CreateUser($nom, $prenom, $date, $pseudo, $mdp, $email, $description) {
 function modifyUser($id, $nom, $prenom, $date, $pseudo, $mdp, $email, $description) {
     global $table;
 
-    
-
     $dbc = GetDatabase();
     $dbc->quote($table);
     $req = "UPDATE " . $table . " SET Nom=:nom, Prenom=:prenom, Date=:date, Pseudo=:pseudo, Password=SHA1(:mdp), Email=:email, Description=:description WHERE ID = " . $id . ";";
