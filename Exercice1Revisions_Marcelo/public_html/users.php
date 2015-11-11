@@ -1,6 +1,7 @@
 <?php
 require './db.php';
 require './UserFunctions.php';
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,21 +17,44 @@ require './UserFunctions.php';
             <table border="1">
 
                 <?php
-                    if(isset($_GET['idDelete']))
-                    {
-                        $idDelete = $_GET['idDelete'];
-                        deleteUser($idDelete);
-                        header('location:users.php');
-                    }
-                
-                    if (!isset($_GET['id'])) {
-                        ShowUser(TableShowUser());
-                    } else {
-                        ShowUserDetails(TableShowOneUser());
-                    }
-                ?>
-            </table>
-            <a href = "index.php">Formulaire</a><br/>
+                if (isset($_GET['idDelete'])) {
+                    $idDelete = $_GET['idDelete'];
+                    deleteUser($idDelete);
+                    header('location:users.php');
+                }
+
+                if (!isset($_GET['id'])) {
+                    echo '<tr>';
+                    echo '<th>Nom</th>';
+                    echo '<th>Prénom</th>';
+                    echo '<th>Email</th>';
+                    echo '<th>Détails</th>';
+                    echo '<th>Modifier</th>';
+                    echo '<th>Supprimer</th>';
+                    echo '</tr>';
+                    ShowUser();
+                } else {
+                    echo '<tr>';
+                    echo '<th>Nom</th>';
+                    echo '<th>Prénom</th>';
+                    echo '<th>Date</th>';
+                    echo '<th>Pseudo</th>';
+                    echo '<th>Mot de passe</th>';
+                    echo '<th>Email</th>';
+                    echo '<th>Description</th>';
+                    echo '<th>Détails</th>';
+                    echo '</tr>';
+                    $user = getOneUser($_GET['id']);
+                    ShowUserDetails($user);
+                }
+                echo '</table> ';
+                if (isset($_SESSION['userlogin'])) {
+                    echo '<br /><a href="deco.php">Logout</a>';
+                } else {
+                    echo '<a href = "index.php">Formulaire</a><br/>';
+                    echo '<a href = "connexion.php">Connexion</a>';
+                }
+                ?>                       
         </section>
         <footer>
             &copy; Rae Vennedict Marcelo 2015

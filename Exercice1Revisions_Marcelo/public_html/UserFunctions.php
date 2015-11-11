@@ -10,14 +10,12 @@ function ShowFormNew() {
     echo '<br><label for = "description">Description:</label><textarea id = "description" rows = "5" cols = "25" placeholder = "description" name = "description"></textarea><br>';
     echo '<input type = "submit" name = "envoyer" value = "Envoyer"/>';
     echo '<input type = "button" name = "annuler" value = "Annuler"/><br/>';
-    echo '<a href = "users.php">Utilisateurs</a><br />';
-    echo '<a href = "connexion.php">Connexion</a>';
+    echo '<a href = "users.php">Utilisateurs</a><br />';    
 }
 //TODO je suis pas convaincue de cette manière d'appeler le getOneUser dans la fonction de showFormModif, cela créé une interdépendence entre les deux
 //il faudrait peut-être plutot faire cet appel endehors puis appeler ShowFormModif en passant en paramètre $user. Pareil pour les autres
 //endroits où vous avez ce genre d'interdépendence
-function ShowFormModif() {
-    $user = getOneUser($_GET['id']);
+function ShowFormModif($user) {
 
     $id = $user['ID'];
     $nom = $user['Nom'];
@@ -38,8 +36,7 @@ function ShowFormModif() {
     echo '<br><label for = "description">Description:</label><textarea id = "description" rows = "5" cols = "25" placeholder = "description" name = "description">' . $description . '</textarea><br>';
     echo '<input type = "submit" name = "modifButton" value = "Modify"/>';
     echo '<input type = "button" name = "annuler" value = "Annuler"/><br/>';
-    echo '<a href = "users.php">Utilisateurs</a><br />';
-    echo '<a href = "connexion.php">Connexion</a>';
+    echo '<a href = "users.php">Utilisateurs</a><br />';    
 }
 
 function ShowFormConnection() {
@@ -50,31 +47,6 @@ function ShowFormConnection() {
     echo '<a href = "users.php">Utilisateurs</a><br />  ';
     echo '<a href = "index.php">Formulaire</a>';
 }
-
-function TableShowUser() {
-    echo '<tr>';
-    echo '<th>Nom</th>';
-    echo '<th>Prénom</th>';
-    echo '<th>Email</th>';
-    echo '<th>Détails</th>';
-    echo '<th>Modifier</th>';
-    echo '<th>Supprimer</th>';
-    echo '</tr>';
-}
-
-function TableShowOneUser() {
-    echo '<tr>';
-    echo '<th>Nom</th>';
-    echo '<th>Prénom</th>';
-    echo '<th>Date</th>';
-    echo '<th>Pseudo</th>';
-    echo '<th>Mot de passe</th>';
-    echo '<th>Email</th>';
-    echo '<th>Description</th>';
-    echo '<th>Détails</th>';
-    echo '</tr>';
-}
-
 function ShowUser() {
     $dataAll = getAllFields();
 
@@ -90,8 +62,7 @@ function ShowUser() {
     }
 }
 
-function ShowUserDetails() {
-    $user = getOneUser($_GET['id']);
+function ShowUserDetails($user) {    
 
     echo '<tr>';
     echo '<td>' . $user['Nom'] . '</td>';

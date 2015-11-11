@@ -3,6 +3,11 @@ require './db.php';
 require './UserFunctions.php';
 //require_once './connexion.php';
 session_start();
+
+/*if (isset($_SESSION['userlogin'])) {
+    header('Location: users.php');
+    exit;
+}*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,10 +32,13 @@ session_start();
                     if (!isset($_GET['id'])) {
                         ShowFormNew();
                     } else {
-                        ShowFormModif();
+                        $user = getOneUser($_GET['id']);
+                        ShowFormModif($user);
                     }
                     if (isset($_SESSION['userlogin'])) {
                         echo '<br /><a href="deco.php">Logout</a>';
+                    } else {
+                        echo '<a href = "connexion.php">Connexion</a>';
                     }
                     ?>                    
                 </div>                

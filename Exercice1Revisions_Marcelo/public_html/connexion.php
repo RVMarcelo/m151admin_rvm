@@ -11,7 +11,7 @@ if (isset($_REQUEST['connecter'])) {
         session_start();
         $_SESSION['userlogin'] = $_REQUEST['pseudo'];
 
-        header("Location: users.php?=LoggedIn");
+        header("Location: users.php");
         exit;
     } else {
         $erreur = "pseudo ou mot de passe est érroné";
