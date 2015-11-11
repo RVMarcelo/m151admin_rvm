@@ -13,7 +13,9 @@ function ShowFormNew() {
     echo '<a href = "users.php">Utilisateurs</a><br />';
     echo '<a href = "connexion.php">Connexion</a>';
 }
-
+//TODO je suis pas convaincue de cette manière d'appeler le getOneUser dans la fonction de showFormModif, cela créé une interdépendence entre les deux
+//il faudrait peut-être plutot faire cet appel endehors puis appeler ShowFormModif en passant en paramètre $user. Pareil pour les autres
+//endroits où vous avez ce genre d'interdépendence
 function ShowFormModif() {
     $user = getOneUser($_GET['id']);
 
