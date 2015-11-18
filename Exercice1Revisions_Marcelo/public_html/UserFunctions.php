@@ -39,6 +39,10 @@ function ShowUser() {
         if (isset($_SESSION['userlogin']) && $_SESSION['userlogin'] == $user['Pseudo']) {
             echo '<td><a href="index.php?id=' . $user['ID'] . '" name="modifLink">Modifier</a></td>';
             echo '<td><a href="deco.php" name="deleteUser">Supprimer</a></td>';
+        }//else{
+        if (isset($_SESSION['userlogin']) && $_SESSION['userlogin'] == $user['Pseudo'] && $user['estAdmin']) {
+            echo '<td><a href="index.php?id=' . $user['ID'] . '" name="modifLink">Modifier</a></td>';
+            echo '<td><a href="deco.php" name="deleteUser">Supprimer</a></td>';
         }
         echo '</tr>';
     }

@@ -6,11 +6,16 @@ $erreur = "";
 if (isset($_REQUEST['connecter'])) {
 
     $userlogin = login($_REQUEST['pseudo'], $_REQUEST['mdp']);
+    $isAdmin = $_REQUEST['estAdmin'];
 
     if ($userlogin !== false) {
-        session_start();
-        $_SESSION['userlogin'] = $_REQUEST['pseudo'];
-
+        if ($isAdmin === 1) {
+            session_start();
+            $_SESSION['userlogin'] = $_REQUEST['pseudo'] && $_REQUEST['estAdmin'];
+        } else {
+            session_start();
+            $_SESSION['userlogin'] = $_REQUEST['pseudo'];
+        }
         header("Location: users.php");
         exit;
     } else {
@@ -39,7 +44,7 @@ $mdp = isset($_REQUEST['mdp']) ? $_REQUEST['mdp'] : "";
             <form method="post">
                 <div>
                     <br><label for = "pseudo">Pseudo:</label><input id = "pseudo" type = "text" placeholder = "Pseudo" name = "pseudo" value="<?php echo $pseudo; ?>" required/><br>
-                    <br><label for = "mdp">Password:</label><input id = "mdp" type = "password" placeholder = "Mot de passe" name = "mdp" value="<?php echo $pseudo; ?>" required/> <br><br>
+                    <br><label for = "mdp">Password:</label><input id = "mdp" type = "password" placeholder = "Mot de passe" name = "mdp" value="<?php echo $mdp; ?>" required/> <br><br>
                     <input type = "submit" name = "connecter" value = "Se connecter"/>
                     <input type = "button" name = "annuler" value = "Annuler"/><br><br>
                     <a href = "users.php">Utilisateurs</a><br />
