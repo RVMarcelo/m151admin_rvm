@@ -30,12 +30,18 @@ and open the template in the editor.
                 <div>                     
 
                     <label for="Sport">Sport:</label>
-                    <select name="classe">                            
+                    <select name="sport">                            
                         <?php
                         foreach ($sport as $data) {
-
-                            echo '<option value = "' . $data['IDSport'] . '" >' . $data['Label'] . '</option>';
-                        }
+                            echo '<option value = "' . $data['IDSport'] . '" >' . $data['Label'] . '</option>';                            
+                        }                       
+                        ?>
+                    </select><br><br>
+                    <select name="sport">                            
+                        <?php
+                        foreach ($sport as $data) {
+                            echo '<option value = "' . $data['IDSport'] . '" >' . $data['Label'] . '</option>';                            
+                        }                        
                         ?>
                     </select><br><br>
                     <input type = "submit" name = "envoyersport" value = "Envoyer"/>
