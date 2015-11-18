@@ -3,6 +3,8 @@
 require './config.php';
 
 $table = 'formulaire';
+$tableClasse = 'classes';
+$tableSport = 'sports';
 
 // Se connect à la DB et renvoi la connexion à l'appelant
 function GetDatabase() {
@@ -20,7 +22,7 @@ function GetDatabase() {
 }
 
 if (isset($_REQUEST['envoyer'])) {
-    
+
     $nom = filter_input(INPUT_POST, 'nom');
     $prenom = filter_input(INPUT_POST, 'prenom');
     $date = filter_input(INPUT_POST, 'date');
@@ -28,15 +30,16 @@ if (isset($_REQUEST['envoyer'])) {
     $mdp = filter_input(INPUT_POST, 'mdp');
     $email = filter_input(INPUT_POST, 'email');
     $description = filter_input(INPUT_POST, 'description');
-    
-    CreateUser($nom, $prenom, $date, $pseudo, $mdp, $email, $description);
+    $classe = filter_input(INPUT_POST, 'classe');
+
+    CreateUser($nom, $prenom, $date, $pseudo, $mdp, $email, $description, $classe);
     header("Location: users.php");
 }
 if (isset($_REQUEST['modifLink'])) {
     header("Location: index.php?=" . $_GET['id']);
 }
 if (isset($_REQUEST['modifButton'])) {
-    
+
     $id = filter_input(INPUT_POST, 'id');
     $nom = filter_input(INPUT_POST, 'nom');
     $prenom = filter_input(INPUT_POST, 'prenom');
@@ -45,17 +48,17 @@ if (isset($_REQUEST['modifButton'])) {
     $mdp = filter_input(INPUT_POST, 'mdp');
     $email = filter_input(INPUT_POST, 'email');
     $description = filter_input(INPUT_POST, 'description');
-    
+
     modifyUser($id, $nom, $prenom, $date, $pseudo, $mdp, $email, $description);
     header("Location: users.php");
 }
 
-function CreateUser($nom, $prenom, $date, $pseudo, $mdp, $email, $description) {
+function CreateUser($nom, $prenom, $date, $pseudo, $mdp, $email, $description, $classe) {
     global $table;
 
     $dbc = GetDatabase();
     $dbc->quote($table);
-    $req = "INSERT INTO $table (Nom, Prenom, Date, Pseudo, Password, Email, Description) VALUES (:nom, :prenom, :date, :pseudo, SHA1(:mdp), :email, :description)";
+    $req = "INSERT INTO $table (Nom, Prenom, Date, Pseudo, Password, Email, Description, IDClasse) VALUES (:nom, :prenom, :date, :pseudo, SHA1(:mdp), :email, :description, :classe)";
 
     //Preparation de la requete  et des parametres
     $requPrep = $dbc->prepare($req);
@@ -66,6 +69,7 @@ function CreateUser($nom, $prenom, $date, $pseudo, $mdp, $email, $description) {
     $requPrep->bindParam(':mdp', $mdp, PDO::PARAM_STR);
     $requPrep->bindParam(':email', $email, PDO::PARAM_STR);
     $requPrep->bindParam(':description', $description, PDO::PARAM_STR);
+    $requPrep->bindParam(':classe', $classe, PDO::PARAM_STR);
 
     $requPrep->execute();
     $requPrep->closeCursor();
@@ -86,7 +90,7 @@ function modifyUser($id, $nom, $prenom, $date, $pseudo, $mdp, $email, $descripti
     $requPrep->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
     $requPrep->bindParam(':mdp', $mdp, PDO::PARAM_STR);
     $requPrep->bindParam(':email', $email, PDO::PARAM_STR);
-    $requPrep->bindParam(':description', $description, PDO::PARAM_STR);
+    $requPrep->bindParam(':description', $description, PDO::PARAM_STR);    
 
     $requPrep->execute();
     $requPrep->closeCursor();
@@ -100,12 +104,12 @@ function deleteUser($idDelete) {
 
 function login($username, $pass) {
     global $table;
-    
+
     $request = GetDatabase()->prepare("SELECT Pseudo, Password FROM " . $table . " WHERE Pseudo = :pseudo AND Password=SHA1(:mdp) LIMIT 1");
     $request->bindParam(':pseudo', $username);
     $request->bindParam(':mdp', $pass);
     $request->execute();
-    
+
     return $request->fetch();
 }
 
@@ -134,4 +138,39 @@ function getOneUser($id) {
     $req = GetDatabase()->query("SELECT * FROM " . $table . " WHERE ID = " . $id . " LIMIT 1");
 
     return $req->fetch();
+}
+
+function getClasse() {
+    global $tableClasse;
+
+    //Connexion à la base de données et création de la requette
+    $dbc = GetDatabase();
+    $dbc->quote($tableClasse);
+    $req = "SELECT * FROM " . $tableClasse;
+
+    //Preparation de la requete  et des parametres
+    $requPrep = $dbc->prepare($req);
+
+    //Execution de la requette et recuperation des données
+    $requPrep->execute();
+    $data = $requPrep->fetchAll();
+    $requPrep->closeCursor();
+    return $data;
+}
+function getSports() {
+    global $tableSport;
+
+    //Connexion à la base de données et création de la requette
+    $dbc = GetDatabase();
+    $dbc->quote($tableSport);
+    $req = "SELECT * FROM " . $tableSport;
+
+    //Preparation de la requete  et des parametres
+    $requPrep = $dbc->prepare($req);
+
+    //Execution de la requette et recuperation des données
+    $requPrep->execute();
+    $data = $requPrep->fetchAll();
+    $requPrep->closeCursor();
+    return $data;
 }

@@ -51,7 +51,8 @@ session_start();
                 }
                 echo '</table> ';
                 if (isset($_SESSION['userlogin'])) {
-                    echo '<br /><a href="deco.php">Logout</a>';
+                    echo '<a href = "joursport.php">Journée sportive</a><br/>';
+                    echo '<br /><a href="deco.php">Logout</a><br>';                    
                 } else {
                     echo '<a href = "index.php">Formulaire</a><br/>';
                     echo '<a href = "connexion.php">Connexion</a>';
