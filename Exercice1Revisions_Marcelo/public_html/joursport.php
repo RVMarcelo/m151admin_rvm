@@ -29,9 +29,10 @@ and open the template in the editor.
             <form action="db.php" method="post">
                 <div>                     
                     <label for="Sport">Sport 1:</label>
-                    <select name="sport1">                            
+                    <select name="sport1">                     
+                        <!--<option disabled selected>Choisir le sport</option>-->
                         <?php
-                        foreach ($sport as $data) {
+                        foreach ($sport as $data) {                            
                             echo '<option value = "' . $data['IDSport'] . '" >' . $data['Label'] . '</option>';
                         }
                         ?>

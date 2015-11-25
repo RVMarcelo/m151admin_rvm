@@ -1,6 +1,7 @@
 <?php
 
-require './config.php';
+require_once './config.php';
+session_start();
 
 $table = 'formulaire';
 $tableClasse = 'classes';
@@ -80,15 +81,23 @@ if (isset($_REQUEST['envoyersport'])) {
             $flag = TRUE;
             break;
         }
-        
-       break; 
-    } 
-    
+
+        break;
+    }
+
     if ($flag == TRUE) {
         echo 'VOUS NE POUVEZ PAS CHOISIR LE MÊME SPORT.';
     }
 
     echo '<br /><a href="joursport.php">Back</a>';
+
+    $Userid = $_SESSION['userlogin'];
+    $sport1 = $_POST['sport1'];
+    $sport2 = $_POST['sport2'];
+    $sport3 = $_POST['sport3'];
+    $sport4 = $_POST['sport4'];
+    
+    SportChoice($Userid, $sport1, $sport2, $sport3, $sport4);
 }
 
 function CreateUser($nom, $prenom, $date, $pseudo, $mdp, $email, $description, $classe) {
@@ -212,4 +221,34 @@ function getSports() {
     $data = $requPrep->fetchAll();
     $requPrep->closeCursor();
     return $data;
+}
+
+function SportChoice($Userid, $sport1, $sport2, $sport3, $sport4) {
+    /* try {
+      $conn->beginTransaction();
+      //Inserts
+      $conn->commit();
+      } catch (Exception $ex) {
+      $conn->rollback();
+      } */
+    
+    $req1 = GetDatabase()->prepare('INSERT INTO choix VALUES(:sport1, :ID, 1');
+    $req1->bindParam(':sport1', $sport1, PDO::PARAM_STR);
+    $req1->bindParam(':ID', $Userid, PDO::PARAM_STR);
+    $req1->execute();
+    
+    $req2 = GetDatabase()->prepare('INSERT INTO choix VALUES(:sport2, :ID, 2');
+    $req2->bindParam(':sport2', $sport2, PDO::PARAM_STR);
+    $req2->bindParam(':ID', $Userid, PDO::PARAM_STR);
+    $req2->execute();
+    
+    $req3 = GetDatabase()->prepare('INSERT INTO choix VALUES(:sport3, :ID, 3');
+    $req3->bindParam(':sport3', $sport3, PDO::PARAM_STR);
+    $req3->bindParam(':ID', $Userid, PDO::PARAM_STR);
+    $req3->execute();
+    
+    $req4 = GetDatabase()->prepare('INSERT INTO choix VALUES(:sport4, :ID, 4');
+    $req4->bindParam(':sport4', $sport4, PDO::PARAM_STR);
+    $req4->bindParam(':ID', $Userid, PDO::PARAM_STR);
+    $req4->execute();
 }
