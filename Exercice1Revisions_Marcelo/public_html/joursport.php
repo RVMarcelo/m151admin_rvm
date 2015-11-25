@@ -28,20 +28,36 @@ and open the template in the editor.
         <section>
             <form action="db.php" method="post">
                 <div>                     
-
-                    <label for="Sport">Sport:</label>
-                    <select name="sport">                            
+                    <label for="Sport">Sport 1:</label>
+                    <select name="sport1">                            
                         <?php
                         foreach ($sport as $data) {
-                            echo '<option value = "' . $data['IDSport'] . '" >' . $data['Label'] . '</option>';                            
-                        }                       
+                            echo '<option value = "' . $data['IDSport'] . '" >' . $data['Label'] . '</option>';
+                        }
                         ?>
                     </select><br><br>
-                    <select name="sport">                            
+                    <label for="Sport">Sport 2:</label>
+                    <select name="sport2">                            
                         <?php
                         foreach ($sport as $data) {
-                            echo '<option value = "' . $data['IDSport'] . '" >' . $data['Label'] . '</option>';                            
-                        }                        
+                            echo '<option value = "' . $data['IDSport'] . '" >' . $data['Label'] . '</option>';
+                        }
+                        ?>
+                    </select><br><br>
+                    <label for="Sport">Sport 3:</label>
+                    <select name="sport3">                            
+                        <?php
+                        foreach ($sport as $data) {
+                            echo '<option value = "' . $data['IDSport'] . '" >' . $data['Label'] . '</option>';
+                        }
+                        ?>
+                    </select><br><br>
+                    <label for="Sport">Sport 4:</label>
+                    <select name="sport4">                            
+                        <?php
+                        foreach ($sport as $data) {
+                            echo '<option value = "' . $data['IDSport'] . '" >' . $data['Label'] . '</option>';
+                        }
                         ?>
                     </select><br><br>
                     <input type = "submit" name = "envoyersport" value = "Envoyer"/>

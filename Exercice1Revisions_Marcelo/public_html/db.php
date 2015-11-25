@@ -53,6 +53,44 @@ if (isset($_REQUEST['modifButton'])) {
     header("Location: users.php");
 }
 
+if (isset($_REQUEST['envoyersport'])) {
+    $flag = FALSE;
+    while ($flag == FALSE) {
+        if ($_REQUEST['sport1'] == $_REQUEST['sport2']) {
+            $flag = TRUE;
+            break;
+        }
+        if ($_REQUEST['sport1'] == $_REQUEST['sport3']) {
+            $flag = TRUE;
+            break;
+        }
+        if ($_REQUEST['sport1'] == $_REQUEST['sport4']) {
+            $flag = TRUE;
+            break;
+        }
+        if ($_REQUEST['sport2'] == $_REQUEST['sport3']) {
+            $flag = TRUE;
+            break;
+        }
+        if ($_REQUEST['sport2'] == $_REQUEST['sport4']) {
+            $flag = TRUE;
+            break;
+        }
+        if ($_REQUEST['sport3'] == $_REQUEST['sport4']) {
+            $flag = TRUE;
+            break;
+        }
+        
+       break; 
+    } 
+    
+    if ($flag == TRUE) {
+        echo 'VOUS NE POUVEZ PAS CHOISIR LE MÊME SPORT.';
+    }
+
+    echo '<br /><a href="joursport.php">Back</a>';
+}
+
 function CreateUser($nom, $prenom, $date, $pseudo, $mdp, $email, $description, $classe) {
     global $table;
 
@@ -90,7 +128,7 @@ function modifyUser($id, $nom, $prenom, $date, $pseudo, $mdp, $email, $descripti
     $requPrep->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
     $requPrep->bindParam(':mdp', $mdp, PDO::PARAM_STR);
     $requPrep->bindParam(':email', $email, PDO::PARAM_STR);
-    $requPrep->bindParam(':description', $description, PDO::PARAM_STR);    
+    $requPrep->bindParam(':description', $description, PDO::PARAM_STR);
 
     $requPrep->execute();
     $requPrep->closeCursor();
@@ -157,6 +195,7 @@ function getClasse() {
     $requPrep->closeCursor();
     return $data;
 }
+
 function getSports() {
     global $tableSport;
 
