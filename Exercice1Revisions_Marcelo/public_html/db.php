@@ -89,15 +89,16 @@ if (isset($_REQUEST['envoyersport'])) {
         echo 'VOUS NE POUVEZ PAS CHOISIR LE MÊME SPORT.';
     }
 
-    echo '<br /><a href="joursport.php">Back</a>';
-
-    $Userid = $_SESSION['userlogin'];
+    $Userid = $_SESSION['idUser'];
     $sport1 = $_POST['sport1'];
     $sport2 = $_POST['sport2'];
     $sport3 = $_POST['sport3'];
     $sport4 = $_POST['sport4'];
-    
+
     SportChoice($Userid, $sport1, $sport2, $sport3, $sport4);
+    //var_dump(SportChoice($Userid, $sport1, $sport2, $sport3, $sport4));    
+    header('Location: users.php');
+    exit;
 }
 
 function CreateUser($nom, $prenom, $date, $pseudo, $mdp, $email, $description, $classe) {
@@ -152,7 +153,7 @@ function deleteUser($idDelete) {
 function login($username, $pass) {
     global $table;
 
-    $request = GetDatabase()->prepare("SELECT Pseudo, Password FROM " . $table . " WHERE Pseudo = :pseudo AND Password=SHA1(:mdp) LIMIT 1");
+    $request = GetDatabase()->prepare("SELECT * FROM " . $table . " WHERE Pseudo = :pseudo AND Password=SHA1(:mdp) LIMIT 1");
     $request->bindParam(':pseudo', $username);
     $request->bindParam(':mdp', $pass);
     $request->execute();
@@ -224,31 +225,38 @@ function getSports() {
 }
 
 function SportChoice($Userid, $sport1, $sport2, $sport3, $sport4) {
-    /* try {
-      $conn->beginTransaction();
-      //Inserts
-      $conn->commit();
-      } catch (Exception $ex) {
-      $conn->rollback();
-      } */
     
-    $req1 = GetDatabase()->prepare('INSERT INTO choix VALUES(:sport1, :ID, 1');
-    $req1->bindParam(':sport1', $sport1, PDO::PARAM_STR);
-    $req1->bindParam(':ID', $Userid, PDO::PARAM_STR);
-    $req1->execute();
-    
-    $req2 = GetDatabase()->prepare('INSERT INTO choix VALUES(:sport2, :ID, 2');
-    $req2->bindParam(':sport2', $sport2, PDO::PARAM_STR);
-    $req2->bindParam(':ID', $Userid, PDO::PARAM_STR);
-    $req2->execute();
-    
-    $req3 = GetDatabase()->prepare('INSERT INTO choix VALUES(:sport3, :ID, 3');
-    $req3->bindParam(':sport3', $sport3, PDO::PARAM_STR);
-    $req3->bindParam(':ID', $Userid, PDO::PARAM_STR);
-    $req3->execute();
-    
-    $req4 = GetDatabase()->prepare('INSERT INTO choix VALUES(:sport4, :ID, 4');
-    $req4->bindParam(':sport4', $sport4, PDO::PARAM_STR);
-    $req4->bindParam(':ID', $Userid, PDO::PARAM_STR);
-    $req4->execute();
+    try {
+        GetDatabase()->beginTransaction();
+
+        $req1 = GetDatabase()->prepare('INSERT INTO choix (IDSport, ID, OrdrePref) VALUES(:sport1, :ID, 1)');
+        $req1->bindParam(':sport1', $sport1, PDO::PARAM_STR);
+        $req1->bindParam(':ID', $Userid, PDO::PARAM_STR);
+        $req1->execute();
+
+        $req2 = GetDatabase()->prepare('INSERT INTO choix (IDSport, ID, OrdrePref) VALUES(:sport2, :ID, 2)');
+        $req2->bindParam(':sport2', $sport2, PDO::PARAM_STR);
+        $req2->bindParam(':ID', $Userid, PDO::PARAM_STR);
+        $req2->execute();
+
+        $req3 = GetDatabase()->prepare('INSERT INTO choix (IDSport, ID, OrdrePref) VALUES(:sport3, :ID, 3)');
+        $req3->bindParam(':sport3', $sport3, PDO::PARAM_STR);
+        $req3->bindParam(':ID', $Userid, PDO::PARAM_STR);
+        $req3->execute();
+
+        $req4 = GetDatabase()->prepare('INSERT INTO choix (IDSport, ID, OrdrePref) VALUES(:sport4, :ID, 4)');
+        $req4->bindParam(':sport4', $sport4, PDO::PARAM_STR);
+        $req4->bindParam(':ID', $Userid, PDO::PARAM_STR);
+        $req4->execute();
+
+        GetDatabase()->commit();
+        
+        return TRUE;
+        
+    } catch (PDOException $e) {
+        throw $e;
+        GetDatabase()->rollback();
+
+        return FALSE;
+    }
 }

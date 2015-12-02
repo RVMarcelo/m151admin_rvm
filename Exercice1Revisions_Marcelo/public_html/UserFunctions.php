@@ -36,15 +36,19 @@ function ShowUser() {
         echo '<td>' . $user['Prenom'] . '</td>';
         echo '<td>' . $user['Email'] . '</td>';
         echo '<td><a href="users.php?id=' . $user['ID'] . '">Details</a></td>';
+        //else{
         if (isset($_SESSION['userlogin']) && $_SESSION['userlogin'] == $user['Pseudo']) {
             echo '<td><a href="index.php?id=' . $user['ID'] . '" name="modifLink">Modifier</a></td>';
             echo '<td><a href="deco.php" name="deleteUser">Supprimer</a></td>';
-        }//else{
-        if (isset($_SESSION['userlogin']) && $_SESSION['userlogin'] == $user['Pseudo'] && $user['estAdmin']) {
-            echo '<td><a href="index.php?id=' . $user['ID'] . '" name="modifLink">Modifier</a></td>';
-            echo '<td><a href="deco.php" name="deleteUser">Supprimer</a></td>';
+        } else {
+            foreach ($dataAll as $user) {
+                if (isset($_SESSION['userlogin']) && $_SESSION['userlogin'] == $user['Pseudo'] && $user['estAdmin']) {
+                    echo '<td><a href="index.php?id=' . $user['ID'] . '" name="modifLink">Modifier</a></td>';
+                    echo '<td><a href="deco.php" name="deleteUser">Supprimer</a></td>';
+                }
+            }
+            echo '</tr>';
         }
-        echo '</tr>';
     }
 }
 

@@ -12,9 +12,11 @@ if (isset($_REQUEST['connecter'])) {
         if ($isAdmin === 1) {
             session_start();
             $_SESSION['userlogin'] = $_REQUEST['pseudo'] && $_REQUEST['estAdmin'];
+            $_SESSION['idUser'] = $userlogin['ID'];
         } else {
             session_start();
             $_SESSION['userlogin'] = $_REQUEST['pseudo'];
+            $_SESSION['idUser'] = $userlogin['ID'];
         }
         header("Location: users.php");
         exit;

@@ -1,7 +1,7 @@
 <?php
 require './db.php';
 require './UserFunctions.php';
-session_start();
+//session_start();
 
 $sport = getSports();
 

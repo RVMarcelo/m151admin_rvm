@@ -2,7 +2,7 @@
 require './db.php';
 require './UserFunctions.php';
 //require_once './connexion.php';
-session_start();
+//session_start();
 
 /* if (isset($_SESSION['userlogin'])) {
   header('Location: users.php');
